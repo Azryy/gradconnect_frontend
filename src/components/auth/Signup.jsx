@@ -1,15 +1,69 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../Navbar/Navbar'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import { RadioGroup } from '../ui/radio-group'
 import { Button } from '../ui/button'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import bg from '../../assets/auth_bg.png'
+import axios from 'axios'
+import { USER_API_END_POINT } from '@/utils/constant'
+import { toast } from 'sonner'
 
 
 
 const Signup = () => {
+
+  const [input, setInput] = useState({
+    fullname: '',
+    email: '',
+    phoneNumber: '',
+    password: '',
+    role: '',
+    file: ''
+
+  });
+
+  const navigate = useNavigate();
+
+  const changeEventHandler=(e)=>{
+    setInput({...input, [e.target.name]: e.target.value})
+  }
+
+  const changeFileHandler=(e)=>{ 
+    setInput({...input, file: e.target.files?.[0]});
+   }
+
+   const submitHandler = async (e) => {
+    e.preventDefault()
+    const formData = new FormData();
+    formData.append('fullname', input.fullname); 
+    formData.append('email', input.email); 
+    formData.append('phoneNumber', input.phoneNumber); 
+    formData.append('password', input.password); 
+    formData.append('role', input.role); 
+    if(input.file){
+      formData.append('file', input.file); 
+    }
+    try {
+      const res = await axios.post(`${USER_API_END_POINT}/register`, formData,{
+        headers:{
+          "Content-Type": "multipart/form-data"
+        },
+        withCredentials: true
+      })
+      if(res.data.success){
+        navigate('/login')
+        toast.success(res.data.message)
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message)
+      
+    }
+    
+   }
+
   return (
     <div
     className="h-screen w-full bg-cover bg-center items-center justify-center"
@@ -19,28 +73,40 @@ const Signup = () => {
   >
       <Navbar />
       <div className='flex items-center justify-center max-w-7xl mx-auto'>
-        <form action="" className='w-1/2 border border-gray-200 rounded-md p-4 my-6 bg-gray-100'>
+        <form onSubmit={submitHandler} className='w-1/2 border border-gray-200 rounded-md p-4 my-6 bg-gray-100'>
           <h1 className='font-bold text-xl mb-5'>Sign up</h1>
           <div className='my-1'>
             <Label>Full name</Label>
             <Input
               type='text'
+              value = {input.fullname}
+              name="fullname"
+              onChange={changeEventHandler}
               placeholder='Enter your full name'
+              required
             />
           </div>
           <div className='my-1'>
             <Label>Email Address</Label>
             <Input
               type='email'
+              value = {input.email}
+              name="email"
+              onChange={changeEventHandler}
               placeholder='Enter your email address'
+              required
             />
           </div>
           <div className='my-1'>
             <Label>Phone Number</Label>
             <Input
               type='number'
+              value = {input.phoneNumber}
+              name="phoneNumber"
+              onChange={changeEventHandler}
               placeholder='Enter your phone number'
               className="no-spinner"
+              required
             />
             <style jsx>{`
         .no-spinner::-webkit-outer-spin-button,
@@ -57,7 +123,11 @@ const Signup = () => {
             <Label>Password</Label>
             <Input
               type='password'
+              value = {input.password}
+              name="password"
+              onChange={changeEventHandler}
               placeholder='Enter your password'
+              required
             />
           </div>
           <div className='flex items-center justify-between'>
@@ -67,6 +137,8 @@ const Signup = () => {
                   type='radio'
                   name="role"
                   value="employee"
+                  checked={input.role === 'employee'}
+                  onChange={changeEventHandler}
                   className='cursor-pointer accent-red-500'
                 />
                 <Label htmlFor="r1">Employee</Label>
@@ -76,6 +148,8 @@ const Signup = () => {
                   type='radio'
                   name="role"
                   value="employer"
+                  checked={input.role === 'employer'}
+                  onChange={changeEventHandler}
                   className='cursor-pointer accent-red-500'
                 />
                 <Label htmlFor="r2">Employer</Label>
@@ -87,6 +161,7 @@ const Signup = () => {
               <Input
                 accept="image/*"
                 type='file'
+                onChange={changeFileHandler}
                 className='cursor-pointer'
               />
             </div>
