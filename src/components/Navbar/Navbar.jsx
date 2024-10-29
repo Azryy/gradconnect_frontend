@@ -5,6 +5,7 @@ import { Button } from '../ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { LogOut, User2 } from 'lucide-react'
 import logo from '../../assets/gradconnect_logo.png'
+import { Link } from 'react-router-dom'
 
 
 
@@ -13,10 +14,10 @@ import logo from '../../assets/gradconnect_logo.png'
 const Navbar = () => {
     const user = false;
     return (
-        <div className='bg-white'>
+        <div className='bg-transparent'>
             <div className='flex items-center justify-between mx-auto max-w-7xl h-16 mt-2'>
                 <div className='flex items-center justify-center gap-x-1'>
-                    <img src={logo} className='w-32 h-24' alt="" />
+                    <Link to='/'><img src={logo} className='w-32 h-24' alt="" /></Link>
                     <h1 className='text-2xl font-bold'>Grad<span className='text-[#F83002]'>Connect</span></h1>
                 </div>
                 <div className='flex items-center gap-12'>
@@ -28,8 +29,8 @@ const Navbar = () => {
                     {
                         !user ? (
                             <div className='flex items-center gap-2'>
-                                <Button variant="outline" className="bg-black text-white hover:text-black ">Login</Button>
-                                <Button className="bg-[#F83002] hover:bg-[#eeeaea] hover:text-[#F83002]">Sign up</Button>
+                                <Link to='/login'><Button variant="outline" className="bg-black text-white hover:text-black ">Login</Button></Link>
+                                <Link to='/signup'><Button className="bg-[#F83002] hover:bg-[#eeeaea] hover:text-[#F83002]">Sign up</Button></Link>       
                             </div>
                         ) : (
                             <Popover>
