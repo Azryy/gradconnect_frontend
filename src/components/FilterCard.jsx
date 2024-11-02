@@ -9,7 +9,7 @@ const filterData = [
     array:["Manila","Batangas","Laguna","Cavite","Pampanga"]
   },
   {
-    filterType:"Industry",
+    filterType:"Department",
     array:["CTE","CAS","CICS","CABEIHM","CET"]
   },
   {

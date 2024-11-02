@@ -8,7 +8,7 @@ import logo from '../../assets/gradconnect_logo.png'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import store from '@/redux/store'
-
+import jaymuel from '../../assets/Jaymuel.jpg'
 
 
 
@@ -40,14 +40,14 @@ const Navbar = () => {
                             <Popover>
                                 <PopoverTrigger asChild>
                                     <Avatar className="cursor-pointer">
-                                        <AvatarImage src="https://i.pinimg.com/736x/24/54/77/2454772ec1cbc3ea0447c176bfc3764c.jpg" alt="@shadcn" />
+                                        <AvatarImage src={jaymuel} alt="@shadcn" />
 
                                     </Avatar>
                                 </PopoverTrigger>
                                 <PopoverContent className="w-80">
                                     <div className='flex gap-4 space-y-2'>
                                         <Avatar className="cursor-pointer">
-                                            <AvatarImage src="https://i.pinimg.com/736x/24/54/77/2454772ec1cbc3ea0447c176bfc3764c.jpg" alt="@shadcn" />
+                                            <AvatarImage src={jaymuel} alt="@shadcn" />
 
                                         </Avatar>
                                         <div>
