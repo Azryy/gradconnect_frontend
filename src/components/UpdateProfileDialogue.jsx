@@ -57,13 +57,14 @@ const UpdateProfileDialogue = ({ open, setOpen }) => {
       setLoading(true);
       const res = await axios.post(`${USER_API_END_POINT}/profile/update`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'multipart/form-data'
         },
         withCredentials: true
       });
 
       if (res.data.success) {
         dispatch(setUser(res.data.user));
+       
         toast.success('Profile updated successfully');
       }
     } catch (error) {
@@ -151,6 +152,7 @@ const UpdateProfileDialogue = ({ open, setOpen }) => {
                   type='file'
                   onChange={fileChangeHandler}
                   accept="application/pdf"
+
                   className='col-span-3'
                 />
               </div>
