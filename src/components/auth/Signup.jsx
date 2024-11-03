@@ -171,6 +171,7 @@ const Signup = () => {
                 type='file'
                 onChange={changeFileHandler}
                 className='cursor-pointer'
+                required
               />
             </div>
           </div>

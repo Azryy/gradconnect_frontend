@@ -8,7 +8,7 @@ import { Label } from './ui/label'
 import AppliedJobTable from './AppliedJobTable'
 import UpdateProfileDialogue from './UpdateProfileDialogue'
 import { useSelector } from 'react-redux'
-import jaymuel from '../assets/Jaymuel.jpg'
+
 
 
 const skills = ["Frontend","Backend","Fullstack","Mobile"]
@@ -24,11 +24,11 @@ const Profile = () => {
                 <div className='flex justify-between items-start'>
                     <div className='flex items-center space-x-4'>
                         <Avatar className="h-20 w-20">
-                            <AvatarImage src={jaymuel} />
+                            <AvatarImage src={user?.profile?.profilePhoto} />
                         </Avatar>
                         <div className='flex flex-col'>
                             <h1 className='text-2xl font-semibold'>{user?.fullname}</h1>
-                            <p className='text-gray-500'>{user?.profile?.bio}</p>
+                            <p className='text-gray-500'>{user?.profile?.bio || 'This user is too lazy to enter a bio'}</p>
                         </div>
                     </div>
                     <Button onClick={() => setOpen(true)} variant="outline" className='mt-4'>
@@ -58,7 +58,7 @@ const Profile = () => {
                 <div className='grid w-full max-w-sm items-center gap-1.5'>
                     <Label className='text-md font-semibold my-2'>Attached Resume</Label>
                     {
-                        isResume ? <a className='text-red-500 font-semibold w-full hover:underline cursor-pointer' href={user?.profile?.resume}target='_blank'>{user?.profile?.resumeOriginalName}</a> : <span>No Resume</span>
+                        isResume ? <a className='text-red-500 font-semibold w-full hover:underline cursor-pointer' href={user?.profile?.resume}target='_blank'>{user?.profile?.resumeOriginalName || "No attached resume"}</a> : <span>No Resume</span>
                     }
                 </div>
                

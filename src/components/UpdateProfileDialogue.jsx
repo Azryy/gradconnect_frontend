@@ -17,9 +17,9 @@ const UpdateProfileDialogue = ({ open, setOpen }) => {
     fullname: user?.fullname || '',
     email: user?.email || '',
     phoneNumber: user?.phoneNumber || '',
-    bio: user?.profile?.bio || '',
-    skills: user?.profile?.skills?.join(', ') || '', // Joining skills as comma-separated string
-    file: user?.profile?.file || null
+    bio: user?.profile?.bio || '', // Empty if undefined
+    skills: user?.profile?.skills?.join(', ') || '', // Convert array to comma-separated string or empty if undefined
+    file: null // Initially null
   });
 
   const dispatch = useDispatch();
@@ -33,6 +33,7 @@ const UpdateProfileDialogue = ({ open, setOpen }) => {
 
   const fileChangeHandler = (e) => {
     const file = e.target.files?.[0];
+
     setInput({
       ...input,
       file: file
@@ -41,14 +42,23 @@ const UpdateProfileDialogue = ({ open, setOpen }) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(input);
+
+    if (!input.fullname || !input.email || !input.phoneNumber) {
+      toast.error("Name, Email, and Phone number are required");
+      return;
+    }
 
     const formData = new FormData();
     formData.append('fullname', input.fullname);
     formData.append('email', input.email);
     formData.append('phoneNumber', input.phoneNumber);
-    formData.append('bio', input.bio);
-    formData.append('skills', input.skills);
+    formData.append('bio', input.bio.trim() === "" ? "" : input.bio); // Set to empty string if bio is empty
+    formData.append('skills', input.skills || ""); // Empty string if undefined
+
+
+
+
+    // Append resume if updated
     if (input.file) {
       formData.append('file', input.file);
     }
@@ -64,7 +74,7 @@ const UpdateProfileDialogue = ({ open, setOpen }) => {
 
       if (res.data.success) {
         dispatch(setUser(res.data.user));
-       
+        console.log('Updated user:', res.data.user); 
         toast.success('Profile updated successfully');
       }
     } catch (error) {
@@ -86,6 +96,7 @@ const UpdateProfileDialogue = ({ open, setOpen }) => {
           </DialogHeader>
           <form onSubmit={submitHandler}>
             <div className='grid gap-4 py-4'>
+
               <div className='grid grid-cols-4 items-center gap-4'>
                 <Label htmlFor="name" className="text-right">Name</Label>
                 <Input

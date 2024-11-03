@@ -7,8 +7,7 @@ import { LogOut, User2 } from 'lucide-react'
 import logo from '../../assets/gradconnect_logo.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import store from '@/redux/store'
-import jaymuel from '../../assets/Jaymuel.jpg'
+
 import axios from 'axios'
 import { USER_API_END_POINT } from '@/utils/constant'
 import { setUser } from '@/redux/authSlice'
@@ -60,19 +59,19 @@ const Navbar = () => {
                             <Popover>
                                 <PopoverTrigger asChild>
                                     <Avatar className="cursor-pointer">
-                                        <AvatarImage src={jaymuel} alt="@shadcn" />
+                                        <AvatarImage src={user?.profile?.profilePhoto} alt="@shadcn" />
 
                                     </Avatar>
                                 </PopoverTrigger>
                                 <PopoverContent className="w-80">
                                     <div className='flex gap-4 space-y-2'>
                                         <Avatar className="cursor-pointer">
-                                            <AvatarImage src={jaymuel} alt="@shadcn" />
+                                            <AvatarImage src={user?.profile?.profilePhoto} alt="@shadcn" />
 
                                         </Avatar>
                                         <div>
-                                            <h4 className='font-medium'>Kurt Dorado</h4>
-                                            <p className='text-sm text-muted-foreground'>Lorem ipsum dolor sit amet.</p>
+                                            <h4 className='font-medium'>{user?.fullname}</h4>
+                                            <p className='text-sm text-muted-foreground'>{user?.profile?.bio}</p>
                                         </div>
 
                                     </div>
