@@ -17,15 +17,15 @@ import { toast } from 'sonner'
 
 
 const Navbar = () => {
-   
-    const {user} = useSelector(store=>store.auth) 
+
+    const { user } = useSelector(store => store.auth)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const logoutHandler = async() => {
+    const logoutHandler = async () => {
         try {
-            const res = await axios.get(`${USER_API_END_POINT}/logout`, {withCredentials:true})
-            if(res.data.success){
+            const res = await axios.get(`${USER_API_END_POINT}/logout`, { withCredentials: true })
+            if (res.data.success) {
                 dispatch(setUser(null))
                 navigate('/')
                 toast.success(res.data.message)
@@ -33,7 +33,7 @@ const Navbar = () => {
         } catch (error) {
             console.log(error);
             toast.error(error.response.data.message)
-            
+
         }
     }
     return (
@@ -45,15 +45,28 @@ const Navbar = () => {
                 </div>
                 <div className='flex items-center gap-12'>
                     <ul className='flex font-medium items-center gap-5 cursor-pointer'>
-                        <Link to='/'><li>Home</li></Link>
-                        <Link to='/jobs'><li>Jobs</li></Link>
-                        <Link to='/browse'><li>Browse</li></Link>
+                        {
+                            user && user.role === 'employer' ? (
+                                <>
+                                    <Link to='/admin/companies'><li>Companies</li></Link>
+                                    <Link to='/admin/jobs'><li>Jobs</li></Link>
+                                </>
+                            ) : (
+                                <>
+                                    <Link to='/'><li>Home</li></Link>
+                                    <Link to='/jobs'><li>Jobs</li></Link>
+                                    <Link to='/browse'><li>Browse</li></Link>
+                                </>
+
+                            )
+                        }
+
                     </ul>
                     {
                         !user ? (
                             <div className='flex items-center gap-2'>
                                 <Link to='/login'><Button variant="outline" className="bg-black text-white hover:text-black ">Login</Button></Link>
-                                <Link to='/signup'><Button className="bg-[#F83002] hover:bg-[#eeeaea] hover:text-[#F83002]">Sign up</Button></Link>       
+                                <Link to='/signup'><Button className="bg-[#F83002] hover:bg-[#eeeaea] hover:text-[#F83002]">Sign up</Button></Link>
                             </div>
                         ) : (
                             <Popover>
@@ -76,10 +89,15 @@ const Navbar = () => {
 
                                     </div>
                                     <div className='flex flex-col my-2 text-gray-700'>
-                                        <div className='flex w-fit items-center cursor-pointer'>
-                                            <User2 />
-                                            <Button variant="link"><Link to='/profile'>View Profile</Link></Button>
-                                        </div>
+                                        {
+                                            user && user.role === 'employee' && (
+                                                <div className='flex w-fit items-center cursor-pointer'>
+                                                    <User2 />
+                                                    <Button variant="link"><Link to='/profile'>View Profile</Link></Button>
+                                                </div>
+                                            )
+                                        }
+
                                         <div className='flex w-fit items-center cursor-pointer'>
                                             <LogOut />
                                             <Button onClick={logoutHandler} variant="link">Logout</Button>
