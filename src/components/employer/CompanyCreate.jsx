@@ -38,7 +38,7 @@ const CompanyCreate = () => {
             }
         } catch (error) {
             console.log("Error registering new company:", error);
-            toast.error("Failed to register company. Please try again.");
+            toast.error(error.response?.data?.message || "An unexpected error occurred.");
         }
     };
     return (
