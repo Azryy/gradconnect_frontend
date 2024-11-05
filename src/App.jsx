@@ -9,6 +9,9 @@ import './styles.css';
 import Browse from './components/Browse'
 import Profile from './components/Profile'
 import JobDescription from './components/JobDescription'
+import Companies from './components/employer/Companies'
+import CompanyCreate from './components/employer/CompanyCreate'
+import CompanySetup from './components/employer/CompanySetup'
 
 const appRouter = createBrowserRouter([
   {
@@ -38,7 +41,25 @@ const appRouter = createBrowserRouter([
   {
     path:'/profile',
     element:<Profile/>
-  }
+  },
+
+
+  {
+    path:'/admin/companies',
+    element:<Companies/>
+  },
+
+  {
+    path:'/admin/companies/create',
+    element:<CompanyCreate/>
+  },
+
+  {
+    path:'/admin/companies/:id',
+    element:<CompanySetup/>
+  },
+
+
   
 ])
 
