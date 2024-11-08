@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from './components/Navbar/Navbar'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Login from './components/auth/Login'
+
 import Signup from './components/auth/Signup'
 import Home from './components/Home'
 import Jobs from './components/Jobs'
@@ -12,6 +12,8 @@ import JobDescription from './components/JobDescription'
 import Companies from './components/employer/Companies'
 import CompanyCreate from './components/employer/CompanyCreate'
 import CompanySetup from './components/employer/CompanySetup'
+import Login from './components/auth/Login'
+import EmployerJobs from './components/employer/EmployerJobs'
 
 const appRouter = createBrowserRouter([
   {
@@ -58,7 +60,10 @@ const appRouter = createBrowserRouter([
     path:'/admin/companies/:id',
     element:<CompanySetup/>
   },
-
+  {
+    path:'/admin/jobs',
+    element:<EmployerJobs/>
+  }
 
   
 ])
