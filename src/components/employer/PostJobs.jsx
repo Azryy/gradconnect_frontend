@@ -30,26 +30,17 @@ const PostJobs = () => {
 
     const selectChangeHandler = (value) => {
         const selectedCompany = companies.find((company) => company.name.toLowerCase() === value);
-        setInput({...input, companyId: selectedCompany._id});
-    }
-
-    
-       
-    const handleCompanyChange = (companyId) => {
-        setInput({
-            ...input,
-            companyId: companyId
-        });
+        setInput({ ...input, companyId: selectedCompany._id });
     };
 
+    const handlePositionChange = (value) => {
+        setInput({ ...input, position: value });
+    };
 
     const submitHandler = (e) => {
         e.preventDefault();
         console.log(input);
-        
-    }
-
-
+    };
 
     return (
         <div>
@@ -129,19 +120,26 @@ const PostJobs = () => {
                         </div>
                         <div>
                             <Label>Department Preferred</Label>
-                            <Input
-                                type="text"
-                                name="position"
-                                value={input.position}
-                                onChange={changeEventHandler}
-                                className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
-                            />
+                            <Select onValueChange={handlePositionChange}>
+                                <SelectTrigger className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1 w-full">
+                                    <SelectValue placeholder="Select a department" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectItem value="CICS">CICS</SelectItem>
+                                        <SelectItem value="CAS">CAS</SelectItem>
+                                        <SelectItem value="CABEIHM">CABEIHM</SelectItem>
+                                        <SelectItem value="CET">CET</SelectItem>
+                                        <SelectItem value="CTE">CTE</SelectItem>
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
                         </div>
                         {
                             companies.length > 0 && (
                                 <div>
                                     <Label>Company</Label>
-                                    <Select onValueChange={selectChangeHandler} >
+                                    <Select onValueChange={selectChangeHandler}>
                                         <SelectTrigger className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1 w-full">
                                             <SelectValue placeholder="Select a company" />
                                         </SelectTrigger>
