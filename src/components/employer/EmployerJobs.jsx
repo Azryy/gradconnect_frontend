@@ -24,7 +24,7 @@ const EmployerJobs = () => {
       <Navbar />
       <div className=' max-w-6xl mx-auto my-10'>
       
-          <Button onClick={()=>navigate("/admin/companies/create")} className='text-right my-10'>Post Job</Button>
+          <Button onClick={()=>navigate("/admin/jobs/create")} className='text-right my-10'>Post Job</Button>
         
         <EmployerJobsTable/>
 
