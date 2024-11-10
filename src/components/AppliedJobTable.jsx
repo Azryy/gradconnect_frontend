@@ -1,39 +1,40 @@
-import React from 'react'
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from './ui/table'
-import { Badge } from './ui/badge'
+import React from 'react';
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from './ui/table';
+import { Badge } from './ui/badge';
+import { useSelector } from 'react-redux';
 
 const AppliedJobTable = () => {
+  const { allAppliedJobs = [] } = useSelector((store) => store.job); // Default to empty array if undefined
+
   return (
     <div>
       <Table>
-        <TableCaption>
-            Recent applied Jobs
-        </TableCaption>
+        <TableCaption>Recent Applied Jobs</TableCaption>
         <TableHeader>
-            <TableRow>
-                <TableHead>Date</TableHead>
-                <TableHead>Job</TableHead>
-                <TableHead>Company</TableHead>
-                <TableHead className='text-right'>Status</TableHead>
-
-            </TableRow>
+          <TableRow>
+            <TableHead>Date</TableHead>
+            <TableHead>Job</TableHead>
+            <TableHead>Company</TableHead>
+            <TableHead className="text-right">Status</TableHead>
+          </TableRow>
         </TableHeader>
         <TableBody>
-            {
-                [1,2].map((item,index)=>(
-                    <TableRow className='font-semibold' key={index}>
-                        <TableCell>  11/01/2024 </TableCell>
-                        <TableCell>  Backend Developer </TableCell>
-                        <TableCell>  Google </TableCell>
-                        <TableCell className='text-right'>  <Badge>Accepted</Badge> </TableCell>
-                    </TableRow>
+          {
+            allAppliedJobs.length === 0 
+              ? <TableRow><TableCell colSpan={4} className="text-center">You have not applied to any job yet</TableCell></TableRow>
+              : allAppliedJobs.map((appliedJob) => (
+                  <TableRow className="font-semibold" key={appliedJob._id}>
+                    <TableCell>{appliedJob?.createdAt?.split("T")[0]}</TableCell>
+                    <TableCell>{appliedJob.job?.title}</TableCell>
+                    <TableCell>{appliedJob.job?.company?.name}</TableCell>
+                    <TableCell className="text-right"><Badge>{appliedJob.status}</Badge></TableCell>
+                  </TableRow>
                 ))
-            }
-            
+          }
         </TableBody>
       </Table>
     </div>
-  )
-}
+  );
+};
 
-export default AppliedJobTable
+export default AppliedJobTable;

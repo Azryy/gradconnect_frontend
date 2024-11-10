@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../Navbar/Navbar';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import { useSelector } from 'react-redux';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import axios from 'axios';
+import { JOB_API_END_POINT } from '@/utils/constant';
+import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
 const PostJobs = () => {
     const [input, setInput] = useState({
@@ -18,6 +22,10 @@ const PostJobs = () => {
         position: "",
         companyId: ""
     });
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+
+    
 
     const { companies } = useSelector(store => store.company);
 
@@ -37,9 +45,27 @@ const PostJobs = () => {
         setInput({ ...input, position: value });
     };
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
-        console.log(input);
+        try {
+            setLoading(true);
+            const res = await axios.post(`${JOB_API_END_POINT}/post`, input, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                withCredentials: true
+            });
+            if (res.data.success) {
+                toast.success(res.data.message);
+                navigate("/admin/jobs");
+            }
+        } catch (error) {
+            toast.error(error.response.data.message)
+        }
+        finally {
+            setLoading(false)
+        }
+
     };
 
     return (
@@ -159,7 +185,9 @@ const PostJobs = () => {
                     </div>
 
                     <div className="flex justify-center mt-5">
-                        <Button className="w-40 bg-red-600">Post</Button>
+                        <Button type="submit" disabled={loading} className='bg-red-600 text-white my-5'>
+                            {loading ? 'Updating...' : 'Update'}
+                        </Button>
                     </div>
                     {
                         companies.length === 0 && <p className='text-red-600 text-xs font-bold text-center my-3'>Please register a company first before posting a job</p>
