@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar/Navbar'
 import Footer from './Footer'
-import FilterCard from './FilterCard'
+
 import Job from './Job';
 import { useSelector } from 'react-redux';
 import {motion} from 'framer-motion';
@@ -30,7 +30,7 @@ const Jobs = () => {
             <div className='max-w-7xl mx-auto mt-5'>
                 <div className='flex gap-5'>
                     <div className='w-20%'>
-                        <FilterCard />
+                       
                     </div>
 
                     {
