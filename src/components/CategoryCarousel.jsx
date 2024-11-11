@@ -1,5 +1,8 @@
 import React from 'react';
 import { Button } from './ui/button';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setSearchedQuery } from '@/redux/jobSlice';
 
 const categories = [
     "CAS", // College of Arts and Sciences
@@ -10,6 +13,12 @@ const categories = [
 ];
 
 const CategoryCarousel = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const searchJobHandler = (query) => {
+        dispatch(setSearchedQuery(query));
+        navigate('/browse')
+    }
     return (
         <div>
             <h1 className='my-3 mx-auto text-center text-4xl font-semibold'>Jobs Related to:</h1>
@@ -18,6 +27,7 @@ const CategoryCarousel = () => {
                     categories.map((cat, index) => (
                         <div key={index} className='w-full sm:w-1/2 md:w-1/3 lg:w-1/5 mb-4 px-2'>
                             <Button
+                                onClick={() => searchJobHandler(cat)}
                                 variant="outline"
                                 className='bg-[#e23434] rounded-full text-white w-full hover:bg-[#9c2626] hover:text-white'
                             >{cat}</Button>

@@ -3,12 +3,14 @@ import LatestJobCards from './LatestJobCards'
 import { useSelector } from 'react-redux'
 import store from '@/redux/store'
 
+
 //const randomJobs = [
   1,2,3,4,5,6,7,8,9
 //]
 
 const LatestJobs = () => {
   const{allJobs} = useSelector(store=>store.job);
+
 
 
   return (

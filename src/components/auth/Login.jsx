@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../Navbar/Navbar';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
@@ -22,7 +22,7 @@ const Login = () => {
 
 
   });
-  const {loading} = useSelector(store=>store.auth)
+  const {loading, user} = useSelector(store=>store.auth)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const changeEventHandler=(e)=>{
@@ -57,6 +57,11 @@ const Login = () => {
     }
     
    }
+   useEffect(()=>{
+      if(user){
+        navigate("/")
+      }
+   },[])
 
   return (
     <div className="h-screen w-full bg-cover bg-center items-center justify-center"
