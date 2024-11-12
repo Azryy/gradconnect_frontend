@@ -41,9 +41,7 @@ const EmployerJobsTable = () => {
             if (res.data.success) {
                 toast.success("Job deleted successfully.");
                 // Remove the job from applied jobs in Redux store
-                dispatch(setAllAppliedJobs((prevAppliedJobs) =>
-                    prevAppliedJobs.filter((appliedJob) => appliedJob.job._id !== jobId)
-                ));
+              
                 // Also remove it from the jobs state
                 setFilterJobs((prevJobs) => prevJobs.filter((job) => job._id !== jobId));
             } else {
