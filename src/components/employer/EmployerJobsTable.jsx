@@ -6,25 +6,33 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const EmployerJobsTable = () => {
-    const { companies, companyByText } = useSelector(store => store.company);
+    const { companyByText } = useSelector(store => store.company);
     const { allEmployerJobs } = useSelector(store => store.job);
-    const [filterJobs, setFilterJobs] = useState(allEmployerJobs);
+    const { user } = useSelector(store => store.auth); // Get user from Redux
+    const [filterJobs, setFilterJobs] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
-        const filteredJobs = allEmployerJobs.filter((job) => {
-            if (!companyByText) {
-                return true;
-            }
-            return job?.company?.name?.toLowerCase().includes(companyByText.toLowerCase());
-        });
-        setFilterJobs(filteredJobs);
-    }, [allEmployerJobs, companyByText]);
+        if (user?._id) { 
+            const filteredJobs = allEmployerJobs.filter((job) => {
+              
+                if (job?.created_by === user._id) {
+                    if (!companyByText) {
+                        return true;
+                    }
+                  
+                    return job?.company?.name?.toLowerCase().includes(companyByText.toLowerCase());
+                }
+                return false; 
+            });
+            setFilterJobs(filteredJobs); 
+        }
+    }, [allEmployerJobs, companyByText, user?._id]); 
 
     return (
         <div>
             <Table>
-                <TableCaption>A list of registered jobs</TableCaption>
+                <TableCaption>A list of your posted jobs</TableCaption>
                 <TableHeader>
                     <TableRow>
                         <TableHead>Company Name</TableHead>
@@ -52,7 +60,7 @@ const EmployerJobsTable = () => {
                                             <Edit2 className='w-4' />
                                             <span>Edit</span>
                                         </div>
-                                        <div onClick={()=>navigate(`/admin/jobs/${job._id}/applicants`)} className='flex items-center w-fit gap-2 cursor-pointer mt-2'>
+                                        <div onClick={() => navigate(`/admin/jobs/${job._id}/applicants`)} className='flex items-center w-fit gap-2 cursor-pointer mt-2'>
                                             <Eye className='w-4'/>
                                             <span>Applicants</span>
                                         </div>
