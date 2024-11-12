@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import store from '@/redux/store'
 import axios from 'axios'
-import { COMPANY_API_END_POINT } from '@/utils/constant'
+import { COMPANY_API_END_POINT, JOB_API_END_POINT } from '@/utils/constant'
 import { toast } from 'sonner'
 
 
@@ -27,6 +27,8 @@ const CompaniesTable = () => {
         setFilterCompany(filteredCompany);
     }, [companies, companyByText]);
 
+   
+
     const deleteCompany = async (companyId) => {
         try {
             const res = await axios.delete(`${COMPANY_API_END_POINT}/delete/${companyId}`, { withCredentials: true });
@@ -40,13 +42,13 @@ const CompaniesTable = () => {
                 toast.error(res.data.message || "Failed to delete company.");
             }
         } catch (error) {
-            // Handle errors from the API more specifically
+          
             console.log(error);
             if (error.response) {
-                // If the error is from the server, show the server's error message
+                
                 toast.error(error.response.data.message || "Something went wrong.");
             } else {
-                // Handle any network or other errors
+              
                 toast.error("Network error, please try again.");
             }
         }
