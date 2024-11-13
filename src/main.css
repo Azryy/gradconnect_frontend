@@ -1,7 +1,7 @@
 /* Toastify overrides */
 .Toastify__toast--custom {
   /* A red background */
-    color: #f51818; /* White text */
+    color: #000000; /* White text */
     font-weight: bold;
 }
 
