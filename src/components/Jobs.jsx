@@ -3,10 +3,13 @@ import Navbar from './Navbar/Navbar'
 import Footer from './Footer'
 
 import Job from './Job';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {motion} from 'framer-motion';
+import { setSearchedQuery } from '@/redux/jobSlice';
+import { useNavigate } from 'react-router-dom';
+import { Button } from './ui/button';
+import { Search } from 'lucide-react';
 
-const jobsArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const Jobs = () => {
     const { allJobs, searchedQuery } = useSelector(store => store.job);
@@ -24,9 +27,28 @@ const Jobs = () => {
             setFilterJobs(allJobs)
         }
     }, [allJobs, searchedQuery])
+    const [query, setQuery] = useState("");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const searchJobHandler = () => {
+        dispatch(setSearchedQuery(query));
+        navigate('/browse')
+    }
+
     return (
         <div>
             <Navbar />
+            <div className='flex w-[40%] shadow-lg border-gray-200 pl-3 rounded-full items-center gap-4 mx-auto my-5'>
+                    <input type="text" 
+                        placeholder='Find your dream job now'
+                        onChange = {(e) => setQuery(e.target.value)}
+                        className='outline-none border-none w-full text-center'
+                    />
+                    <Button onClick={searchJobHandler} className='rounded-r-full'>
+                        <Search className='h-5 w-5 '/>
+                    </Button>
+                </div>
             <div className='max-w-7xl mx-auto mt-5'>
                 <div className='flex gap-5'>
                     <div className='w-20%'>

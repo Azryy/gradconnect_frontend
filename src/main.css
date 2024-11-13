@@ -1,0 +1,10 @@
+/* Toastify overrides */
+.Toastify__toast--custom {
+  /* A red background */
+    color: #f51818; /* White text */
+    font-weight: bold;
+}
+
+.Toastify__progress-bar--custom {
+    background-color: #f51818; /* Darker red for the progress bar */
+}

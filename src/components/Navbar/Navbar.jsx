@@ -45,6 +45,9 @@ const Navbar = () => {
                 </div>
                 <div className='flex items-center gap-12'>
                     <ul className='flex font-medium items-center gap-5 cursor-pointer'>
+
+
+
                         {
                             user && user.role === 'employer' ? (
                                 <>
@@ -53,9 +56,8 @@ const Navbar = () => {
                                 </>
                             ) : (
                                 <>
-                                    <Link to='/'><li>Home</li></Link>
-                                    <Link to='/jobs'><li>Jobs</li></Link>
-                                    <Link to='/browse'><li>Browse</li></Link>
+
+
                                 </>
 
                             )
@@ -69,45 +71,52 @@ const Navbar = () => {
                                 <Link to='/signup'><Button className="bg-[#F83002] hover:bg-[#eeeaea] hover:text-[#F83002]">Sign up</Button></Link>
                             </div>
                         ) : (
-                            <Popover>
-                                <PopoverTrigger asChild>
-                                    <Avatar className="cursor-pointer">
-                                        <AvatarImage src={user?.profile?.profilePhoto} alt="@shadcn" />
+                            <>
+                                <ul className='flex font-medium items-center gap-5 cursor-pointer'>
+                                    <Link to='/'><li>Home</li></Link>
+                                    <Link to='/jobs'><li>Jobs</li></Link>
+                                </ul>
 
-                                    </Avatar>
-                                </PopoverTrigger>
-                                <PopoverContent className="w-80">
-                                    <div className='flex gap-4 space-y-2'>
+                                <Popover>
+                                    <PopoverTrigger asChild>
                                         <Avatar className="cursor-pointer">
                                             <AvatarImage src={user?.profile?.profilePhoto} alt="@shadcn" />
 
                                         </Avatar>
-                                        <div>
-                                            <h4 className='font-medium'>{user?.fullname}</h4>
-                                            <p className='text-sm text-muted-foreground'>{user?.profile?.bio}</p>
+                                    </PopoverTrigger>
+                                    <PopoverContent className="w-80">
+                                        <div className='flex gap-4 space-y-2'>
+                                            <Avatar className="cursor-pointer">
+                                                <AvatarImage src={user?.profile?.profilePhoto} alt="@shadcn" />
+
+                                            </Avatar>
+                                            <div>
+                                                <h4 className='font-medium'>{user?.fullname}</h4>
+                                                <p className='text-sm text-muted-foreground'>{user?.profile?.bio}</p>
+                                            </div>
+
+                                        </div>
+                                        <div className='flex flex-col my-2 text-gray-700'>
+                                            {
+                                                user && user.role === 'employee' && (
+                                                    <div className='flex w-fit items-center cursor-pointer'>
+                                                        <User2 />
+                                                        <Button variant="link"><Link to='/profile'>View Profile</Link></Button>
+                                                    </div>
+                                                )
+                                            }
+
+                                            <div className='flex w-fit items-center cursor-pointer'>
+                                                <LogOut />
+                                                <Button onClick={logoutHandler} variant="link">Logout</Button>
+                                            </div>
+
+
                                         </div>
 
-                                    </div>
-                                    <div className='flex flex-col my-2 text-gray-700'>
-                                        {
-                                            user && user.role === 'employee' && (
-                                                <div className='flex w-fit items-center cursor-pointer'>
-                                                    <User2 />
-                                                    <Button variant="link"><Link to='/profile'>View Profile</Link></Button>
-                                                </div>
-                                            )
-                                        }
-
-                                        <div className='flex w-fit items-center cursor-pointer'>
-                                            <LogOut />
-                                            <Button onClick={logoutHandler} variant="link">Logout</Button>
-                                        </div>
-
-
-                                    </div>
-
-                                </PopoverContent>
-                            </Popover>
+                                    </PopoverContent>
+                                </Popover>
+                            </>
                         )
                     }
 

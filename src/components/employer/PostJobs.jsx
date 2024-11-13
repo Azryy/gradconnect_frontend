@@ -25,7 +25,7 @@ const PostJobs = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    
+
 
     const { companies } = useSelector(store => store.company);
 
@@ -152,6 +152,7 @@ const PostJobs = () => {
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectGroup>
+                                        <SelectItem value="ALL">ALL</SelectItem>
                                         <SelectItem value="CICS">CICS</SelectItem>
                                         <SelectItem value="CAS">CAS</SelectItem>
                                         <SelectItem value="CABEIHM">CABEIHM</SelectItem>
