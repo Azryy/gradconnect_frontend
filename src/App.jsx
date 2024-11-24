@@ -17,6 +17,7 @@ import EmployerJobs from './components/employer/EmployerJobs'
 import PostJobs from './components/employer/PostJobs'
 import Applicants from './components/employer/Applicants'
 import ProtectedRoute from './components/employer/ProtectedRoute'
+import MessageApplicant from './components/employer/MessageApplicant'
 
 const appRouter = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ const appRouter = createBrowserRouter([
   {
     path:'/admin/jobs/:id/applicants',
     element:<Applicants/>
+  },
+  {
+    path:'/admin/jobs/applicants/message',
+    element:<MessageApplicant/>
   }
 
   

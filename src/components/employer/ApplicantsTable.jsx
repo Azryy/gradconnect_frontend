@@ -7,10 +7,13 @@ import store from '@/redux/store'
 import { toast } from 'sonner'
 import axios from 'axios'
 import { APPLICATION_API_END_POINT } from '@/utils/constant'
+import { Button } from '../ui/button'
+import { useNavigate } from 'react-router-dom'
 
 const shortListingStatus = ["Accepted", "Rejected"]
 const ApplicantsTable = () => {
     const { applicants } = useSelector(store => store.application);
+    const navigate = useNavigate();
 
     const statusHandler = async (status,id) => {
         try {
@@ -33,6 +36,7 @@ const ApplicantsTable = () => {
                         <TableHead>Full Name</TableHead>
                         <TableHead>Email</TableHead>
                         <TableHead>Contact Number</TableHead>
+                        <TableHead>Message</TableHead>
                         <TableHead>Resume</TableHead>
                         <TableHead>Date</TableHead>
                         <TableHead className="float-right cursor-pointer">Action</TableHead>
@@ -45,6 +49,7 @@ const ApplicantsTable = () => {
                                 <TableCell>{item?.applicant?.fullname}</TableCell>
                                 <TableCell>{item?.applicant?.email}</TableCell>
                                 <TableCell>{item?.applicant?.phoneNumber}</TableCell>
+                                <TableCell><Button onClick={()=>navigate("/admin/jobs/applicants/message")} variant="outline">Message</Button></TableCell>
                                 <TableCell>
                                     
                                     {
