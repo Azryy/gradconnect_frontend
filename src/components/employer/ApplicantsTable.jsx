@@ -51,7 +51,7 @@ const ApplicantsTable = () => {
                                         item.applicant?.profile?.resume ? <a className='text-red-600' href={item?.applicant?.profile?.resume} target='_blank'>{item?.applicant?.profile?.resumeOriginalName}</a> :
                                         <span>No resume</span>
                                     }</TableCell>
-                                <TableCell>{item?.applicant.createdAt.split("T")[0]}</TableCell>
+                                <TableCell>{item?.applicant?.createdAt.split("T")[0]}</TableCell>
                                 <TableCell className="text-right">
                                     <Popover>
                                         <PopoverTrigger>
