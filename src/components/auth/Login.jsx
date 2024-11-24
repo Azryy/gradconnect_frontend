@@ -113,7 +113,7 @@ const Login = () => {
                   id="r1"
                   className="cursor-pointer accent-red-500"
                 />
-                <Label htmlFor="r1">Employee</Label>
+                <Label htmlFor="r1">Applicant</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <Input

@@ -34,6 +34,25 @@ const JobDescription = () => {
         }
     };
 
+    const cancelJobHandler = async () => {
+        try {
+            const res = await axios.delete(`${APPLICATION_API_END_POINT}/cancel/${jobId}`, { withCredentials: true });
+            if (res.data.success) {
+                setIsApplied(false);
+                const updateSingleJob = {
+                    ...singleJob,
+                    applications: singleJob.applications.filter(application => application.applicant !== user?._id),
+                };
+                dispatch(setSingleJob(updateSingleJob));
+                toast.success(res.data.message);
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error(error.response?.data?.message || "Error canceling the application");
+        }
+    };
+
+
     useEffect(() => {
         const fetchSingleJob = async () => {
             try {
@@ -91,8 +110,13 @@ const JobDescription = () => {
                         </div>
                     </div>
 
-                    <Button onClick={isApplied ? null : applyJobHandler}
-                        disabled={isApplied} className={`rounded-lg ${isApplied ? 'cursor-not-allowed' : 'bg-red-600 hover:bg-red-700'}`}>{isApplied ? 'You Already Applied' : 'Apply Now'}</Button>
+                    <Button
+                        onClick={isApplied ? cancelJobHandler : applyJobHandler}
+                        className={`rounded-lg ${isApplied ? 'bg-blue-600 hover:bg-blue-700' : 'bg-red-600 hover:bg-red-700'}`}
+                    >
+                        {isApplied ? 'Cancel Application' : 'Apply Now'}
+                    </Button>
+
                 </div>
 
                 <div className=''>
