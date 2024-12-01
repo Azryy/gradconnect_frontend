@@ -20,21 +20,10 @@ const CategoryCarousel = () => {
         navigate('/browse')
     }
     return (
-        <div>
-            <h1 className='my-3 mx-auto text-center text-4xl font-semibold'>Jobs Related to:</h1>
-            <div className='flex flex-row flex-wrap justify-center w-full max-w-xl mx-auto my-4'> {/* Adjusted my-20 to my-4 */}
-                {
-                    categories.map((cat, index) => (
-                        <div key={index} className='w-full sm:w-1/2 md:w-1/3 lg:w-1/5 mb-4 px-2'>
-                            <Button
-                                onClick={() => searchJobHandler(cat)}
-                                variant="outline"
-                                className='bg-[#e23434] rounded-full text-white w-full hover:bg-[#9c2626] hover:text-white'
-                            >{cat}</Button>
-                        </div>
-                    ))
-                }
-            </div>
+        <div className='flex items-center justify-center'>
+             <Button onClick={()=>navigate("/jobs")} className="bg-red-600 font-bold hover:bg-gray-100 w-72 hover:text-black text-2xl h-14 py-4 px-8 rounded-full my-10">
+                    Apply Now
+                </Button>
         </div>
     );
 };

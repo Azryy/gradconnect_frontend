@@ -73,7 +73,7 @@ const CompaniesTable = () => {
                             <TableRow key={company._id}>
                                 <TableCell>
                                     <Avatar>
-                                        <AvatarImage src={company.logo || jaymuel} />
+                                        <AvatarImage src={company.logo} />
                                     </Avatar>
                                 </TableCell>
                                 <TableCell>{company.name}</TableCell>

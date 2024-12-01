@@ -18,6 +18,11 @@ import PostJobs from './components/employer/PostJobs'
 import Applicants from './components/employer/Applicants'
 import ProtectedRoute from './components/employer/ProtectedRoute'
 import MessageApplicant from './components/employer/MessageApplicant'
+import Cics from './components/Cics'
+import Cabeihm from './components/Cabeihm'
+import Cte from './components/Cte'
+import Cas from './components/Cas'
+import Cet from './components/Cet'
 
 const appRouter = createBrowserRouter([
   {
@@ -79,6 +84,26 @@ const appRouter = createBrowserRouter([
   {
     path:'/admin/jobs/applicants/message',
     element:<MessageApplicant/>
+  },
+  {
+    path:'/colleges/cics',
+    element: <Cics/>
+  },
+  {
+    path:'/colleges/cabeihm',
+    element: <Cabeihm/>
+  },
+  {
+    path:'/colleges/cte',
+    element: <Cte/>
+  },
+  {
+    path:'/colleges/cas',
+    element: <Cas/>
+  },
+  {
+    path:'/colleges/cet',
+    element:<Cet/>
   }
 
   

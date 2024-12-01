@@ -112,7 +112,7 @@ const JobDescription = () => {
 
                     <Button
                         onClick={isApplied ? cancelJobHandler : applyJobHandler}
-                        className={`rounded-lg ${isApplied ? 'bg-blue-600 hover:bg-blue-700' : 'bg-red-600 hover:bg-red-700'}`}
+                        className={`rounded-lg ${isApplied ? 'bg-yellow-600 hover:bg-yellow-700' : 'bg-red-600 hover:bg-red-700'}`}
                     >
                         {isApplied ? 'Cancel Application' : 'Apply Now'}
                     </Button>

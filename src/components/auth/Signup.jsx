@@ -40,7 +40,12 @@ const Signup = () => {
    }
 
    const submitHandler = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    if (input.password.length < 6) {
+      toast.error('Password must be at least 6 characters long');
+      return; // Prevent form submission if validation fails
+    }
+
     const formData = new FormData();
     formData.append('fullname', input.fullname); 
     formData.append('email', input.email); 

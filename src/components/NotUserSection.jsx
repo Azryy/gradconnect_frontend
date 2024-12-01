@@ -52,7 +52,7 @@ const NotUserSection = () => {
                             <p className='text-gray-500 mb-4'>
                                 The College of Informatics and Computing Sciences (CICS) is an academic institution within many universities, specializing in computing, information technology, and related fields.
                             </p>
-                            <Button className='bg-red-600 text-white font-medium px-4 py-2 rounded-md hover:bg-red-700 transition duration-200 ease-in-out'>
+                            <Button onClick={()=>navigate("/colleges/cics")} className='bg-red-600 text-white font-medium px-4 py-2 rounded-md hover:bg-red-700 transition duration-200 ease-in-out'>
                                 View More
                             </Button>
                         </div>
@@ -66,7 +66,7 @@ const NotUserSection = () => {
                             <p className='text-gray-500 mb-4'>
                                 CABEIHM offers a comprehensive range of programs aimed at preparing students for successful careers in areas such as accountancy, business administration, economics, international business, and hospitality management. 
                             </p>
-                            <Button className='bg-red-600 text-white font-medium px-4 py-2 rounded-md hover:bg-red-700 transition duration-200 ease-in-out'>
+                            <Button onClick={()=>navigate('/colleges/cabeihm')} className='bg-red-600 text-white font-medium px-4 py-2 rounded-md hover:bg-red-700 transition duration-200 ease-in-out'>
                                 View More
                             </Button>
                         </div>
@@ -78,7 +78,7 @@ const NotUserSection = () => {
                             <p className='text-gray-500 mb-4'>
                                 CTE offers a variety of degree programs aimed at training teachers for different educational levels, including elementary, secondary, and special education. 
                             </p>
-                            <Button className='bg-red-600 text-white font-medium px-4 py-2 rounded-md hover:bg-red-700 transition duration-200 ease-in-out'>
+                            <Button onClick={()=>navigate("/colleges/cte")} className='bg-red-600 text-white font-medium px-4 py-2 rounded-md hover:bg-red-700 transition duration-200 ease-in-out'>
                                 View More
                             </Button>
                         </div>
@@ -90,7 +90,7 @@ const NotUserSection = () => {
                             <p className='text-gray-500 mb-4'>
                               CAS provides essential liberal arts education, promoting critical thinking, communication skills, and a broad understanding of human culture, society, and the natural world. 
                             </p>
-                            <Button className='bg-red-600 text-white font-medium px-4 py-2 rounded-md hover:bg-red-700 transition duration-200 ease-in-out'>
+                            <Button onClick={()=>navigate("/colleges/cas")} className='bg-red-600 text-white font-medium px-4 py-2 rounded-md hover:bg-red-700 transition duration-200 ease-in-out'>
                                 View More
                             </Button>
                         </div>
@@ -102,7 +102,7 @@ const NotUserSection = () => {
                             <p className='text-gray-500 mb-4'>
                              CET plays a critical role in developing future engineers and technologists equipped with the skills needed to address contemporary challenges in industries ranging from construction and manufacturing to information technology and energy. 
                             </p>
-                            <Button className='bg-red-600 text-white font-medium px-4 py-2 rounded-md hover:bg-red-700 transition duration-200 ease-in-out'>
+                            <Button onClick={()=>navigate("/colleges/cet")} className='bg-red-600 text-white font-medium px-4 py-2 rounded-md hover:bg-red-700 transition duration-200 ease-in-out'>
                                 View More
                             </Button>
                         </div>
