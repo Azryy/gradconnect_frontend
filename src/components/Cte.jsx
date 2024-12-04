@@ -99,7 +99,7 @@ const Cte = () => {
       {/* Footer */}
       <footer className="bg-blue-600 text-white py-4">
         <div className="container mx-auto text-center">
-          <p>&copy; 2024 College of Accountancy, Business, Economics, International Hospitality Management. All Rights Reserved.</p>
+          <p>&copy; 2024 College of Teachers Education. All Rights Reserved.</p>
         </div>
       </footer>
 
